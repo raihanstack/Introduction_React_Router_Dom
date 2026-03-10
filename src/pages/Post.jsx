@@ -1,13 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Posts = () => {
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        fetch("https://jsonplaceholder.typicode.com/posts")
-            .then((res) => res.json())
-            .then((data) => setPosts(data));
-    }, []);
+    const posts = useLoaderData();
 
     return (
         <div>
@@ -15,8 +9,7 @@ const Posts = () => {
             <ul>
                 {posts.map((post) => (
                     <li key={post.id}>
-                        <h2>{post.title}</h2>
-                        <p>{post.body}</p>
+                        <Link to={`/posts/${post.id}`}>{post.title}</Link>
                     </li>
                 ))}
             </ul>
